@@ -17,7 +17,7 @@ const Cart = ({ cart, handleClearCart, children }) => {
         //     product.quantity = 1;
         // }
         // product.quantity = product.quantity || 1;
-        console.log(product.quantity);
+        // console.log(product.quantity);
         totalPrice = totalPrice + product.price * product.quantity;
         totalShipping = totalShipping + product.shipping;
         quantity = quantity + product.quantity;

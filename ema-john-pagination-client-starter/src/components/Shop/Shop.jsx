@@ -15,7 +15,7 @@ const Shop = () => {
     const numberOfPages = Math.ceil( count / itemPerPage );
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products?page=${currentPage}&item=${itemPerPage}`)
+        fetch(`http://localhost:5000/products?page=${currentPage}&size=${itemPerPage}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [currentPage, itemPerPage]);
@@ -67,7 +67,7 @@ const Shop = () => {
     }
 
 
-    //pagination keys
+    //pagination keys---> iteration
 
     // const pages = [];
     // for(let i=0; i<numberOfPages; i++){

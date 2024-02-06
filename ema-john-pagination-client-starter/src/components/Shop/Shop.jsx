@@ -14,9 +14,26 @@ const Shop = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [cart, setCart] = useState(loadedCartData)
     const [count, setCount] = useState(0);
+    console.log(count);
     // const count = 76;
 
     const numberOfPages = Math.ceil( count / itemPerPage );
+
+    //pagination keys---> iteration
+
+    // const pages = [];
+    // for(let i=0; i<numberOfPages; i++){
+    //     pages.push(i)
+    // }
+    // console.log(pages);
+
+    const pages = [...Array(numberOfPages).keys()]
+
+    useEffect( () => {
+        fetch('http://localhost:5000/productCount')
+        .then(res => res.json())
+        .then(data => setCount(data.count))
+    }, [])
 
     useEffect(() => {
         fetch(`http://localhost:5000/products?page=${currentPage}&size=${itemPerPage}`)
@@ -24,11 +41,6 @@ const Shop = () => {
             .then(data => setProducts(data))
     }, [currentPage, itemPerPage]);
 
-    useEffect( () => {
-        fetch('http://localhost:5000/productCount')
-        .then(res => res.json())
-        .then(data => setCount(data))
-    }, [])
 
     // useEffect(() => {
     //     const storedCart = getShoppingCart();
@@ -76,18 +88,7 @@ const Shop = () => {
         deleteShoppingCart();
     }
 
-
-    //pagination keys---> iteration
-
-    // const pages = [];
-    // for(let i=0; i<numberOfPages; i++){
-    //     pages.push(i)
-    // }
-    // console.log(pages);
     
-    const pages = [...Array(numberOfPages).keys()]
-    
-
     const handleItemPerPage = e => {
         const val = parseInt(e.target.value);
         // console.log(typeof(val));
